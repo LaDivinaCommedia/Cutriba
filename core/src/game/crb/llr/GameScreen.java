@@ -1,6 +1,7 @@
 package game.crb.llr;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -14,8 +15,10 @@ import com.badlogic.gdx.utils.Array;
 import game.crb.Utility.BodyBuilder;
 import game.crb.cp.CutribaContactListener;
 import game.crb.gf.Player;
+import game.crb.gss.CutribaInputProcessor;
 
 /**
+ *
  * Created by Iggytoto on 19.04.2017.
  */
 public class GameScreen implements Screen {
@@ -27,7 +30,7 @@ public class GameScreen implements Screen {
     private Array<Body> mapBodies;
     private Body playerBody;
 
-    public GameScreen(OrthographicCamera camera, MapRenderer renderer, Actor player, Map map) {
+    public GameScreen(OrthographicCamera camera, MapRenderer renderer, final Actor player, Map map) {
         this.camera = camera;
         this.renderer = renderer;
         this.player = player;
@@ -39,6 +42,9 @@ public class GameScreen implements Screen {
 
         mapBodies = BodyBuilder.buildMapShapes(map,32,this.physics);
         playerBody  = BodyBuilder.buildPlayerShape(this.physics);
+        CutribaInputProcessor cutribaInputProcessor = new CutribaInputProcessor();
+        cutribaInputProcessor.addObserver((Player)player);
+        Gdx.input.setInputProcessor(cutribaInputProcessor);
     }
 
     @Override
