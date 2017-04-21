@@ -32,7 +32,7 @@ public class GameScreen implements Screen {
         this.renderer = renderer;
         this.player = player;
         this.batch = new SpriteBatch();
-        this.physics = new World(new Vector2(0,-89),true);
+        this.physics = new World(new Vector2(0,-89),false);
         physics.setContactListener(new CutribaContactListener());
 
         renderer.setView(camera);

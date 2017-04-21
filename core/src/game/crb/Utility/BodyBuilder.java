@@ -22,7 +22,7 @@ public class BodyBuilder {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
 
-        bodyDef.position.set(500,500);
+        bodyDef.position.set(500,600);
 
         Body body = world.createBody(bodyDef);
 
@@ -56,15 +56,6 @@ public class BodyBuilder {
                 RectangleMapObject rect = (RectangleMapObject)object;
                 body = getRectangle(rect, world);
             }
-            /*else if (object instanceof PolygonMapObject) {
-                shape = getPolygon((PolygonMapObject)object);
-            }
-            else if (object instanceof PolylineMapObject) {
-                shape = getPolyline((PolylineMapObject)object);
-            }
-            else if (object instanceof CircleMapObject) {
-                shape = getCircle((CircleMapObject)object);
-            }*/
             else {
                 continue;
             }
@@ -87,54 +78,16 @@ public class BodyBuilder {
         fd.filter.categoryBits = 0x0010;
         fd.filter.maskBits = 0x0001;
 
-        EdgeShape shape = new EdgeShape();
+         PolygonShape shape = new PolygonShape();
 
-        shape.set(-rectangle.width/2,-rectangle.height/2,rectangle.width/2,rectangle.height/2);
+
+        shape.setAsBox(rectangle.width/2,rectangle.height/2);
         fd.shape = shape;
-
         result = world.createBody(bd);
         result.createFixture(fd);
         shape.dispose();
 
         return result;
 
-    }
-
-    private static CircleShape getCircle(CircleMapObject circleObject) {
-        Circle circle = circleObject.getCircle();
-        CircleShape circleShape = new CircleShape();
-        circleShape.setRadius(circle.radius / ppt);
-        circleShape.setPosition(new Vector2(circle.x / ppt, circle.y / ppt));
-        return circleShape;
-    }
-
-    private static PolygonShape getPolygon(PolygonMapObject polygonObject) {
-        PolygonShape polygon = new PolygonShape();
-        float[] vertices = polygonObject.getPolygon().getTransformedVertices();
-
-        float[] worldVertices = new float[vertices.length];
-
-        for (int i = 0; i < vertices.length; ++i) {
-            System.out.println(vertices[i]);
-            worldVertices[i] = vertices[i] / ppt;
-        }
-
-        polygon.set(worldVertices);
-        return polygon;
-    }
-
-    private static ChainShape getPolyline(PolylineMapObject polylineObject) {
-        float[] vertices = polylineObject.getPolyline().getTransformedVertices();
-        Vector2[] worldVertices = new Vector2[vertices.length / 2];
-
-        for (int i = 0; i < vertices.length / 2; ++i) {
-            worldVertices[i] = new Vector2();
-            worldVertices[i].x = vertices[i * 2] / ppt;
-            worldVertices[i].y = vertices[i * 2 + 1] / ppt;
-        }
-
-        ChainShape chain = new ChainShape();
-        chain.createChain(worldVertices);
-        return chain;
     }
 }
