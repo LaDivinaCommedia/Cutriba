@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import game.crb.gf.GameFlow;
 import game.crb.llr.GameScreen;
 
+import java.util.List;
+
 /**
  * Created by Iggytoto on 19.04.2017.
  */
@@ -27,16 +29,11 @@ public class GameLauncher extends Game {
 
     @Override
     public void create() {
-        OrthographicCamera camera = new OrthographicCamera();
-        camera.setToOrtho(false);
         Gdx.input.setInputProcessor(inputProcessor);
         gameFlow = new GameFlow();
 
+        List<String> levels = gameFlow.loadListOfLevels();
 
-        // instead of 'select level'
-        MapRenderer renderer = gameFlow.loadLevel("maps/demo_map.tmx");
-        Actor actor = gameFlow.loadPlayer("Circle.png");
-        
-        this.setScreen(new GameScreen(camera, renderer, actor));
+        this.setScreen(gameFlow.loadLevel(levels.get(0)));
     }
 }
