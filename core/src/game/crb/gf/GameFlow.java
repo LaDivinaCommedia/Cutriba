@@ -1,8 +1,10 @@
 package game.crb.gf;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import game.crb.rm.ResourceManager;
 
 /**
@@ -19,10 +21,16 @@ public class GameFlow {
         resourceManager = new ResourceManager();
     }
 
-    public MapRenderer initLevel(String levelName) {
+    public MapRenderer loadLevel(String levelName) {
         TiledMap map = resourceManager.loadMap(levelName);
         this.render = new OrthogonalTiledMapRenderer(map);
         this.map = map;
         return this.render;
+    }
+
+    public Actor loadPlayer(String playerName) {
+        Texture texture = resourceManager.loadSprite(playerName);
+        Player actor = new Player(texture);
+        return actor;
     }
 }

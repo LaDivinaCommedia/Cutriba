@@ -3,12 +3,11 @@ package game.crb.gss;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapRenderer;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import game.crb.gf.GameFlow;
 import game.crb.llr.GameScreen;
 
@@ -35,7 +34,9 @@ public class GameLauncher extends Game {
 
 
         // instead of 'select level'
-        MapRenderer renderer = gameFlow.initLevel("maps/demo_map.tmx");
-        this.setScreen(new GameScreen(camera, renderer));
+        MapRenderer renderer = gameFlow.loadLevel("maps/demo_map.tmx");
+        Actor actor = gameFlow.loadPlayer("");
+        
+        this.setScreen(new GameScreen(camera, renderer, actor));
     }
 }
