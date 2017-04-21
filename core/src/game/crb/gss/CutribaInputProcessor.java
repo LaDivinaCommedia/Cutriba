@@ -3,9 +3,7 @@ package game.crb.gss;
 import com.badlogic.gdx.InputProcessor;
 import game.crb.Utility.Actions;
 
-import javax.swing.*;
 import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by Iggytoto on 19.04.2017.
@@ -22,39 +20,34 @@ public class CutribaInputProcessor extends Observable implements InputProcessor 
         return event;
     }
 
-
     private void checkAndNotify(int keycode){
+        setChanged();
         switch (keycode){
             case(21):
             case(29):
-                event = Actions.LEFT;
-                this.notifyObservers();
+                this.notifyObservers(Actions.LEFT);
                 break;
             case(20):
             case(47):
-                event = Actions.DOWN;
-                this.notifyObservers();
+                this.notifyObservers(Actions.DOWN);
                 break;
             case(22):
             case(32):
-                event = Actions.RIGHT;
-                this.notifyObservers();
+                this.notifyObservers(Actions.RIGHT);
                 break;
             case(19):
             case(51):
-                event = Actions.UP;
-                this.notifyObservers();
+                this.notifyObservers(Actions.UP);
                 break;
             case(62):
-                event = Actions.JUMP;
-                this.notifyObservers();
+                this.notifyObservers(Actions.FLIP);
                 break;
         }
     }
 
     @Override
     public boolean keyDown(int keycode) {
-        checkAndNotify(keycode);
+        //checkAndNotify(keycode);
         return false;
     }
 
@@ -66,7 +59,7 @@ public class CutribaInputProcessor extends Observable implements InputProcessor 
 
     @Override
     public boolean keyTyped(char character) {
-        checkAndNotify(character);
+        //checkAndNotify(character);
         return false;
     }
 

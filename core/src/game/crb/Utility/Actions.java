@@ -5,5 +5,9 @@ package game.crb.Utility;
  * Created by v.vanichkov on 21.04.2017.
  */
 public enum Actions{
-    UP, DOWN, LEFT, RIGHT, JUMP
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    FLIP
 }

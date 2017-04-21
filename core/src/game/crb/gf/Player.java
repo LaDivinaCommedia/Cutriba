@@ -14,24 +14,16 @@ import java.util.Observer;
  * date:    21.04.2017
  * version: 1.0
  */
-public class Player extends Actor implements Observer{
+public class Player extends Actor {
     private Texture texture;
 
     public Player(Texture texture){
         this.texture = texture;
         setBounds(getX(),getY(),texture.getWidth(),texture.getHeight());
     }
-
-
-
-    @Override
+   @Override
     public void draw(Batch batch, float alpha){
         batch.draw(texture,this.getX(),getY());
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        Actions value = ((CutribaInputProcessor)o).getEvent();
-        System.out.println(value);
-    }
 }

@@ -1,7 +1,6 @@
 package game.crb.llr;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,16 +11,19 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import game.crb.Utility.Actions;
 import game.crb.Utility.BodyBuilder;
 import game.crb.cp.CutribaContactListener;
-import game.crb.gf.Player;
 import game.crb.gss.CutribaInputProcessor;
+
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * Created by Iggytoto on 19.04.2017.
  */
-public class GameScreen implements Screen {
+public class GameScreen implements Screen, Observer {
     private OrthographicCamera camera;
     private MapRenderer renderer;
     private Actor player;
@@ -43,8 +45,9 @@ public class GameScreen implements Screen {
         mapBodies = BodyBuilder.buildMapShapes(map,32,this.physics);
         playerBody  = BodyBuilder.buildPlayerShape(this.physics);
         CutribaInputProcessor cutribaInputProcessor = new CutribaInputProcessor();
-        cutribaInputProcessor.addObserver((Player)player);
+        cutribaInputProcessor.addObserver(this);
         Gdx.input.setInputProcessor(cutribaInputProcessor);
+        Box2D.init();
     }
 
     @Override
@@ -99,5 +102,19 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(arg == Actions.UP){
+            playerBody.applyLinearImpulse(0,200,playerBody.getPosition().x,playerBody.getPosition().y,true);
+        }
+        if(arg == Actions.LEFT){
+            playerBody.applyForceToCenter(-200,0,true);
+        }
+        if(arg == Actions.RIGHT){
+            playerBody.applyForceToCenter(200,0,true);
+        }
+        physics.step(1/60,6,2);
     }
 }
