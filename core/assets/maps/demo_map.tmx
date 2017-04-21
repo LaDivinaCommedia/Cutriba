@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="30" tilewidth="32" tileheight="32" nextobjectid="11">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="30" tilewidth="32" tileheight="32" nextobjectid="18">
  <tileset firstgid="1" name="cutriba_basic" tilewidth="32" tileheight="32" tilecount="10" columns="0">
   <tile id="0">
    <image width="32" height="32" source="blade_top.png"/>
@@ -68,14 +68,13 @@
  </layer>
  <objectgroup name="obstacles">
   <object id="2" x="389.333" y="546.667" width="1206.67" height="57.3333"/>
-  <object id="3" x="513.333" y="414.667" width="156" height="61.3333"/>
-  <object id="4" x="740" y="388" width="153.333" height="57.3333"/>
-  <object id="5" x="965.333" y="321.333" width="182.667" height="60"/>
-  <object id="6" x="1186.67" y="257.333" width="185.333" height="60"/>
-  <object id="7" x="1185.33" y="257.333" width="186.667" height="58.6667"/>
-  <object id="8" x="1536" y="122.667" width="64" height="421.333"/>
-  <object id="9" x="386.667" y="125.333" width="58.6667" height="418.667"/>
-  <object id="10" x="385.333" y="62.6667" width="1214.67" height="62.6667"/>
+  <object id="11" x="385.333" y="66.6667" width="60" height="476"/>
+  <object id="12" x="513.333" y="416" width="156" height="64"/>
+  <object id="13" x="738.667" y="386.667" width="153.333" height="60"/>
+  <object id="14" x="961.333" y="321.333" width="189.333" height="60"/>
+  <object id="15" x="1186.67" y="256" width="188" height="61.3333"/>
+  <object id="16" x="446.667" y="62.6667" width="1154.67" height="64"/>
+  <object id="17" x="1537.33" y="130.667" width="58.6667" height="416"/>
  </objectgroup>
  <layer name="obstacles" width="100" height="30">
   <data encoding="csv">

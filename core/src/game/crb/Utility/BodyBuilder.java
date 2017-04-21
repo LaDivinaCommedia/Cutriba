@@ -51,17 +51,12 @@ public class BodyBuilder {
                 continue;
             }
 
-            Shape shape;
-            float xPosition = 0;
-            float yPosition = 0;
-
+            Body body;
             if (object instanceof RectangleMapObject) {
                 RectangleMapObject rect = (RectangleMapObject)object;
-                shape = getRectangle(rect);
-                xPosition = rect.getRectangle().x;
-                yPosition = rect.getRectangle().y;
+                body = getRectangle(rect, world);
             }
-            else if (object instanceof PolygonMapObject) {
+            /*else if (object instanceof PolygonMapObject) {
                 shape = getPolygon((PolygonMapObject)object);
             }
             else if (object instanceof PolylineMapObject) {
@@ -69,35 +64,40 @@ public class BodyBuilder {
             }
             else if (object instanceof CircleMapObject) {
                 shape = getCircle((CircleMapObject)object);
-            }
+            }*/
             else {
                 continue;
             }
 
-            BodyDef bd = new BodyDef();
-            bd.type = BodyDef.BodyType.StaticBody;
-            bd.position.set(xPosition,yPosition);
-
-            Body body = world.createBody(bd);
-            body.createFixture(shape, 1f);
-
             bodies.add(body);
 
-            shape.dispose();
-        }
+            }
         return bodies;
     }
 
-    private static PolygonShape getRectangle(RectangleMapObject rectangleObject) {
+    private static Body getRectangle(RectangleMapObject rectangleObject,World world) {
         Rectangle rectangle = rectangleObject.getRectangle();
-        PolygonShape polygon = new PolygonShape();
-        Vector2 size = new Vector2((rectangle.x + rectangle.width * 0.5f) / ppt,
-                (rectangle.y + rectangle.height * 0.5f ) / ppt);
-        polygon.setAsBox(rectangle.width * 0.5f / ppt,
-                rectangle.height * 0.5f / ppt,
-                size,
-                0.0f);
-        return polygon;
+        Body result;
+
+        BodyDef bd = new BodyDef();
+        bd.type = BodyDef.BodyType.StaticBody;
+        bd.position.set(rectangle.x,rectangle.y);
+
+        FixtureDef fd = new FixtureDef();
+        fd.filter.categoryBits = 0x0010;
+        fd.filter.maskBits = 0x0001;
+
+        EdgeShape shape = new EdgeShape();
+
+        shape.set(-rectangle.width/2,-rectangle.height/2,rectangle.width/2,rectangle.height/2);
+        fd.shape = shape;
+
+        result = world.createBody(bd);
+        result.createFixture(fd);
+        shape.dispose();
+
+        return result;
+
     }
 
     private static CircleShape getCircle(CircleMapObject circleObject) {
