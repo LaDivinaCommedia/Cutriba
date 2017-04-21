@@ -13,13 +13,10 @@ import game.crb.llr.MenuScreen;
  */
 public class GameLauncher extends Game implements MenuController.LevelLister {
     private InputProcessor inputProcessor;
-    private World physics;
     private MenuScreen menuScreen;
 
     public GameLauncher(){
         this.inputProcessor = new CutribaInputProcessor();
-        this.physics = new World(new Vector2(0,-98f),true);
-
     }
 
     @Override
