@@ -58,11 +58,13 @@ public class GameScreen implements Screen {
         player.setPosition(playerBody.getPosition().x,playerBody.getPosition().y);
         player.setRotation(playerBody.getAngle());
 
+        camera.position.x = playerBody.getPosition().x;
+        camera.position.y = playerBody.getPosition().y;
+
         camera.update();
 
-        camera.position.x = player.getX();
-        camera.position.y = player.getY();
         renderer.render();
+
         batch.begin();
         player.draw(batch,1);
         batch.end();
