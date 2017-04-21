@@ -23,6 +23,7 @@ public class GameLauncher extends Game {
     public GameLauncher(){
         this.inputProcessor = new CutribaInputProcessor();
         this.physics = new World(new Vector2(0,-98f),true);
+
     }
 
     @Override
