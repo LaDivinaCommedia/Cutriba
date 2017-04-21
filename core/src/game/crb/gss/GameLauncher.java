@@ -35,7 +35,7 @@ public class GameLauncher extends Game {
 
         // instead of 'select level'
         MapRenderer renderer = gameFlow.loadLevel("maps/demo_map.tmx");
-        Actor actor = gameFlow.loadPlayer("");
+        Actor actor = gameFlow.loadPlayer("Circle.png");
         
         this.setScreen(new GameScreen(camera, renderer, actor));
     }
