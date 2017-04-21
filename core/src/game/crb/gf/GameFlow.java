@@ -21,17 +21,15 @@ import java.util.Map;
  */
 public class GameFlow {
     private ResourceManager resourceManager;
-    private MapRenderer render;
+    private MapRenderer renderer;
     private Map<String, String> listOfLevels = null;
 
     public GameFlow() {
         resourceManager = ResourceManager.getInstance();
     }
 
-    private MapRenderer loadMap(String levelName) {
-        TiledMap map = resourceManager.loadMap(levelName);
-        this.render = new OrthogonalTiledMapRenderer(map);
-        return this.render;
+    private TiledMap loadMap(String levelName) {
+        return resourceManager.loadMap(levelName);
     }
 
     private Actor loadPlayer(String playerName) {
@@ -56,9 +54,10 @@ public class GameFlow {
             levelInfo = resourceManager.loadLevelInfo(levelLocation);
             OrthographicCamera camera = new OrthographicCamera();
             camera.setToOrtho(false);
-            MapRenderer renderer = this.loadMap(levelInfo.get(ResourceManager.MAP));
+            TiledMap map = this.loadMap(levelInfo.get(ResourceManager.MAP));
+            this.renderer = new OrthogonalTiledMapRenderer(map);
             Actor actor = this.loadPlayer(levelInfo.get(ResourceManager.PLAYER));
-            return new GameScreen(camera, renderer, actor);
+            return new GameScreen(camera, renderer, actor, map);
         } catch (IOException e) {
             e.printStackTrace();
         }
