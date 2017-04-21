@@ -31,8 +31,7 @@ public class BodyBuilder {
 
         FixtureDef fixtureDef = new FixtureDef();   //IDK WTF is this
         fixtureDef.shape = shape;
-        fixtureDef.density = 0.1f;                  //just dont ask
-        fixtureDef.restitution = 0.5f;              //yep its half
+        fixtureDef.density =1f;
 
         body.createFixture(fixtureDef);
         shape.dispose();
@@ -53,9 +52,14 @@ public class BodyBuilder {
             }
 
             Shape shape;
+            float xPosition = 0;
+            float yPosition = 0;
 
             if (object instanceof RectangleMapObject) {
-                shape = getRectangle((RectangleMapObject)object);
+                RectangleMapObject rect = (RectangleMapObject)object;
+                shape = getRectangle(rect);
+                xPosition = rect.getRectangle().x;
+                yPosition = rect.getRectangle().y;
             }
             else if (object instanceof PolygonMapObject) {
                 shape = getPolygon((PolygonMapObject)object);
@@ -72,8 +76,10 @@ public class BodyBuilder {
 
             BodyDef bd = new BodyDef();
             bd.type = BodyDef.BodyType.StaticBody;
+            bd.position.set(xPosition,yPosition);
+
             Body body = world.createBody(bd);
-            body.createFixture(shape, 1);
+            body.createFixture(shape, 1f);
 
             bodies.add(body);
 

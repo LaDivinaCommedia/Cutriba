@@ -8,11 +8,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import game.crb.Utility.BodyBuilder;
+import game.crb.cp.CutribaContactListener;
 import game.crb.gf.Player;
 
 /**
@@ -33,13 +33,12 @@ public class GameScreen implements Screen {
         this.player = player;
         this.batch = new SpriteBatch();
         this.physics = new World(new Vector2(0,-89),true);
+        physics.setContactListener(new CutribaContactListener());
+
         renderer.setView(camera);
 
         mapBodies = BodyBuilder.buildMapShapes(map,32,this.physics);
         playerBody  = BodyBuilder.buildPlayerShape(this.physics);
-
-        playerBody.getPosition().x = 100;
-        playerBody.getPosition().y = 100;
     }
 
     @Override
