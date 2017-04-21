@@ -61,7 +61,7 @@ public class GameFlow {
             camera.setToOrtho(false);
             MapRenderer renderer = this.loadMap(levelInfo.get(ResourceManager.MAP));
             Actor actor = this.loadPlayer(levelInfo.get(ResourceManager.PLAYER));
-            GameScreen screen = new GameScreen(camera, renderer, actor);
+            GameScreen screen = new GameScreen(camera, renderer, actor, map);
             return screen;
         } catch (IOException e) {
             e.printStackTrace();
