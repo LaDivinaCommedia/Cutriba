@@ -11,7 +11,7 @@ import game.crb.rm.ResourceManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -21,35 +21,32 @@ import java.util.Map;
  */
 public class GameFlow {
     private ResourceManager resourceManager;
-    private TiledMap map;
     private MapRenderer render;
     private Map<String, String> listOfLevels = null;
 
     public GameFlow() {
-        resourceManager = new ResourceManager();
+        resourceManager = ResourceManager.getInstance();
     }
 
-    public MapRenderer loadMap(String levelName) {
+    private MapRenderer loadMap(String levelName) {
         TiledMap map = resourceManager.loadMap(levelName);
         this.render = new OrthogonalTiledMapRenderer(map);
-        this.map = map;
         return this.render;
     }
 
-    public Actor loadPlayer(String playerName) {
+    private Actor loadPlayer(String playerName) {
         Texture texture = resourceManager.loadSprite(playerName);
-        Player actor = new Player(texture);
-        return actor;
+        return new Player(texture);
     }
 
-    public List<String> loadListOfLevels() {
+    public Collection<String> loadListOfLevels() {
         try {
             listOfLevels = resourceManager.loadListOfLevels();
-            return new ArrayList<String>(listOfLevels.keySet());
+            return new ArrayList<>(listOfLevels.keySet());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new ArrayList<String>();
+        return new ArrayList<>();
     }
 
     public GameScreen loadLevel(String levelName) {
@@ -61,8 +58,7 @@ public class GameFlow {
             camera.setToOrtho(false);
             MapRenderer renderer = this.loadMap(levelInfo.get(ResourceManager.MAP));
             Actor actor = this.loadPlayer(levelInfo.get(ResourceManager.PLAYER));
-            GameScreen screen = new GameScreen(camera, renderer, actor);
-            return screen;
+            return new GameScreen(camera, renderer, actor);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.XmlReader;
 
 import java.io.File;
@@ -22,43 +23,44 @@ import java.util.*;
  */
 public class ResourceManager implements Disposable {
     private static String FILE_LEVELS = "levels.xml";
+    private static ResourceManager resourceManager;
 
-    public static String MAP = "MAP";
-    public static String PLAYER = "PLAYER";
+    public static String MAP = "map";
+    public static String PLAYER = "player";
 
-    protected List<Disposable> disposableList;
 
-    public ResourceManager() {
-        disposableList = new ArrayList<Disposable>();
+    private List<Disposable> disposableList;
+
+    private ResourceManager() {
+        disposableList = new ArrayList<>();
+    }
+
+    public static ResourceManager getInstance() {
+        if (resourceManager == null) {
+            resourceManager = new ResourceManager();
+        }
+        return resourceManager;
     }
 
     public Map<String, String> loadListOfLevels() throws IOException {
-        Map<String, String> levels = new HashMap<String, String>();
-        XmlReader xml = new XmlReader();
-        XmlReader.Element root = xml.parse(new FileReader(FILE_LEVELS));
-
-        int childCount = root.getChildCount();
-        XmlReader.Element child;
-        String name, location;
-        for (int i = 0; i < childCount; ++i) {
-            child = root.getChild(i);
-
-            name = child.getChildByName("name").getText();
-            location = child.getChildByName("location").getText();
-            levels.put(name, location);
-        }
+        Map<String, String> levels = new HashMap<>();
+        Json json = new Json();
+        levels = json.fromJson(levels.getClass(), Gdx.files.internal("levels.json"));
         return levels;
     }
 
     public Map<String, String> loadLevelInfo(String location) throws IOException {
-        Map<String, String> levelInfo = new HashMap<String, String>();
-
-        XmlReader xml = new XmlReader();
-        XmlReader.Element root = xml.parse(new FileReader(location));
-
-        levelInfo.put(MAP, root.getChildByName(MAP.toLowerCase()).getText());
-        levelInfo.put(PLAYER, root.getChildByName(PLAYER.toLowerCase()).getText());
+        Map<String, String> levelInfo = new HashMap<>();
+        Json json = new Json();
+        levelInfo = json.fromJson(levelInfo.getClass(), Gdx.files.internal(location));
         return levelInfo;
+    }
+
+    public Map<String, String> loadMenu() {
+        Map<String, String> menu = new HashMap<>();
+        Json json = new Json();
+        menu = json.fromJson(menu.getClass(), Gdx.files.internal("menu.json"));
+        return menu;
     }
 
     public TiledMap loadMap(String name) {

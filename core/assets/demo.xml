@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<level>
-    <map>maps/demo_map.tmx</map>
-    <player>circle.png</player>
-</level>

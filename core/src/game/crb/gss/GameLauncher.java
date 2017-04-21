@@ -3,23 +3,18 @@ package game.crb.gss;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.MapRenderer;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import game.crb.gf.GameFlow;
-import game.crb.llr.GameScreen;
-
-import java.util.List;
+import game.crb.llr.MenuScreen;
 
 /**
  * Created by Iggytoto on 19.04.2017.
  */
-public class GameLauncher extends Game {
+public class GameLauncher extends Game implements MenuController.LevelLister {
     private InputProcessor inputProcessor;
     private World physics;
-    private GameFlow gameFlow;
+    private MenuScreen menuScreen;
 
     public GameLauncher(){
         this.inputProcessor = new CutribaInputProcessor();
@@ -30,10 +25,15 @@ public class GameLauncher extends Game {
     @Override
     public void create() {
         Gdx.input.setInputProcessor(inputProcessor);
-        gameFlow = new GameFlow();
+        menuScreen = new MenuScreen();
+        new MenuController(menuScreen, this);
+        this.setScreen(menuScreen);
+    }
 
-        List<String> levels = gameFlow.loadListOfLevels();
-
-        this.setScreen(gameFlow.loadLevel(levels.get(0)));
+    @Override
+    public void onSelectedLevel(Screen screen) {
+        if (screen != null) {
+            this.setScreen(screen);
+        }
     }
 }
