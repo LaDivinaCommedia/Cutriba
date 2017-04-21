@@ -2,7 +2,7 @@ package game.crb.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import game.crb.GameLauncher;
+import game.crb.gss.GameLauncher;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {

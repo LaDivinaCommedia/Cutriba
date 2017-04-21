@@ -1,4 +1,4 @@
-package game.crb;
+package game.crb.gss;
 
 import com.badlogic.gdx.InputProcessor;
 
