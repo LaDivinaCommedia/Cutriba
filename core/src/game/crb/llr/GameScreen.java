@@ -136,6 +136,10 @@ public class GameScreen extends BaseScreen implements Observer {
             setChanged();
             notifyObservers(GameEvent.GAME_OVER);
         }
+        if(GameEvent.LEVEL_FINISHED == arg){
+            setChanged();
+            notifyObservers(GameEvent.LEVEL_FINISHED);
+        }
     }
 
     private void createRandomRotationTimer() {
