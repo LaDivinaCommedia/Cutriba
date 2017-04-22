@@ -32,19 +32,25 @@ public class Player extends Actor {
     }
 
     public void update() {
+        if (body == null) {
+            return;
+        }
         //updating the player sprite position on the player body
         this.setPosition(body.getPosition().x, body.getPosition().y);
         this.setRotation(body.getAngle());
     }
 
-    public void move(float x, float y) {
-        move(x, y, 100.0f);
+    public void move(float dx, float dy) {
+        move(dx, dy, 100.0f);
     }
 
-    public void move(float x, float y, float velocity) {
+    public void move(float dx, float dy, float velocity) {
+        if (body == null) {
+            return;
+        }
         float mass = body.getMass();
         Vector2 targetPosition = new Vector2(body.getPosition());
-        targetPosition.add(x, y);
+        targetPosition.add(dx, dy);
         // Now calculate the impulse magnitude and use it to scale
         // a direction (because its 2D movement)
         float impulseMag = mass * velocity;
