@@ -1,4 +1,5 @@
 {
   "map": "maps/demo_map.tmx",
-  "player": "circle.png"
+  "player": "circle.png",
+  "background_sound": "background.mp3"
 }

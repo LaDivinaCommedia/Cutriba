@@ -2,9 +2,11 @@ package game.crb.llr;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapRenderer;
@@ -32,9 +34,13 @@ public class GameScreen extends BaseScreen implements Observer {
     private SpriteBatch batch;
     private World physics;
     private Color clearColor;
+    private Music backgroundMusic;
 
-    public GameScreen(OrthographicCamera camera, MapRenderer renderer, Player player, Map map) {
+    public GameScreen(OrthographicCamera camera, MapRenderer renderer, Player player, Map map, Music music) {
         this.camera = camera;
+        this.backgroundMusic = music;
+        this.backgroundMusic.setLooping(true);
+        this.backgroundMusic.play();
         this.renderer = renderer;
         this.player = player;
         this.batch = new SpriteBatch();
