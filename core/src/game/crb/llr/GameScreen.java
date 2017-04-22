@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
@@ -72,7 +73,10 @@ public class GameScreen implements Screen, Observer {
 
         camera.update();
 
+        renderer.setView(camera);
         renderer.render();
+
+        batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
         player.draw(batch,1);
