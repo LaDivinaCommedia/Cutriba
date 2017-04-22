@@ -25,7 +25,7 @@ import java.util.Random;
 /**
  * Created by Iggytoto on 19.04.2017.
  */
-public class GameScreen implements Screen, Observer {
+public class GameScreen extends BaseScreen implements Observer {
     private OrthographicCamera camera;
     private MapRenderer renderer;
     private Player player;
@@ -126,10 +126,9 @@ public class GameScreen implements Screen, Observer {
         }
         physics.step(1 / 60, 6, 2);
 
-
         if(GameEvent.GAMEOVER == arg){
-
-            player.setPosition(700,700);
+            setChanged();
+            notifyObservers(GameEvent.GAMEOVER);
         }
     }
 

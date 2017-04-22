@@ -21,7 +21,7 @@ import java.util.*;
  * date:    21.04.2017
  * version: 1.0
  */
-public class MenuScreen implements Screen {
+public class MenuScreen extends BaseScreen implements Screen {
     private List<TextButton> buttons;
     private Stage stage;
     private Skin skin;
