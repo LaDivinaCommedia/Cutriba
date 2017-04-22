@@ -46,7 +46,8 @@ public class GameScreen implements Screen, Observer {
         clearColor = new Color(1, 1, 1, 1);
         renderer.setView(camera);
 
-        player.initBody(physics);
+        float[] start = BodyBuilder.searcForStart(map);
+        player.initBody(start[0],start[1],physics);
         mapBodies = BodyBuilder.buildMapShapes(map, 32, this.physics);
         CutribaInputProcessor cutribaInputProcessor = new CutribaInputProcessor();
         cutribaInputProcessor.addObserver(this);

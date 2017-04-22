@@ -20,11 +20,11 @@ public class BodyBuilder {
     // The pixels per tile. If your tiles are 16x16, this is set to 16f
     private static float ppt = 32f;
 
-    public static Body buildPlayerShape(World world){
+    public static Body buildPlayerShape(float x,float y,World world){
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
 
-        bodyDef.position.set(500,600);
+        bodyDef.position.set(x,y);
 
         Body body = world.createBody(bodyDef);
 
@@ -32,7 +32,7 @@ public class BodyBuilder {
         shape.setRadius(16f);
         shape.setPosition(new Vector2(16,16));
 
-        FixtureDef fixtureDef = new FixtureDef();   //IDK WTF is this
+        FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density =1f;
 
@@ -89,5 +89,24 @@ public class BodyBuilder {
 
         return result;
 
+    }
+
+    public static float[] searcForStart(Map map) {
+        MapObjects objects = map.getLayers().get("gameObjects").getObjects();
+
+        for(MapObject object : objects) {
+
+            if (object instanceof TextureMapObject) {
+                continue;
+            }
+
+            if(object.getName().equals("Start")){
+
+                Rectangle r = ((RectangleMapObject)object).getRectangle();
+                return new float[]{r.x + r.width/2,r.y + r.height/2};
+            }
+
+        }
+        return new float[2];
     }
 }

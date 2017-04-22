@@ -27,8 +27,8 @@ public class Player extends Actor {
         setBounds(getX(),getY(),texture.getWidth(),texture.getHeight());
     }
 
-    public void initBody(World world) {
-        body = BodyBuilder.buildPlayerShape(world);
+    public void initBody(float x,float y,World world) {
+        body = BodyBuilder.buildPlayerShape(x,y,world);
     }
 
     public void update() {
