@@ -36,7 +36,7 @@ public class Player extends Actor {
             return;
         }
         //updating the player sprite position on the player body
-        this.setPosition(body.getPosition().x, body.getPosition().y);
+        this.setPosition(body.getWorldCenter().x - 16, body.getWorldCenter().y - 16);
         this.setRotation(body.getAngle());
     }
 
