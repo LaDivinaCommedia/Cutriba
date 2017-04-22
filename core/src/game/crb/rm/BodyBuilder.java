@@ -35,11 +35,15 @@ public class BodyBuilder {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density =1f;
+        fixtureDef.friction = 0.1f;
+        fixtureDef.restitution = 0.0f;
+
 
         body.createFixture(fixtureDef);
         shape.dispose();
 
         body.getFixtureList().get(0).setUserData("player");
+        body.setAngularDamping(10000f);
 
         return body;
     }
@@ -80,6 +84,8 @@ public class BodyBuilder {
         bd.position.set(rectangle.x + rectangle.width/2,rectangle.y + rectangle.height/2);
 
         FixtureDef fd = new FixtureDef();
+        fd.friction = 0.1f;
+
 
         PolygonShape shape = new PolygonShape();
 

@@ -20,20 +20,16 @@ public class CutribaInputProcessor extends Observable implements InputProcessor 
         return event;
     }
 
-    private void checkAndNotify(int keycode){
+    private void checkAndNotifyDownEvent(int keycode){
         setChanged();
         switch (keycode){
             case(21):
             case(29):
-                this.notifyObservers(Actions.LEFT);
-                break;
-            case(20):
-            case(47):
-                this.notifyObservers(Actions.DOWN);
+                this.notifyObservers(Actions.START_LEFT);
                 break;
             case(22):
             case(32):
-                this.notifyObservers(Actions.RIGHT);
+                this.notifyObservers(Actions.START_RIGHT);
                 break;
             case(19):
             case(51):
@@ -45,15 +41,30 @@ public class CutribaInputProcessor extends Observable implements InputProcessor 
         }
     }
 
+    private void checkAndNotifyUpEvent(int keycode) {
+        setChanged();
+        switch (keycode){
+            case(21):
+            case(29):
+                this.notifyObservers(Actions.STOP_LEFT);
+                break;
+            case(22):
+            case(32):
+                this.notifyObservers(Actions.STOP_RIGHT);
+                break;
+        }
+    }
+
+
     @Override
     public boolean keyDown(int keycode) {
-        checkAndNotify(keycode);
+        checkAndNotifyDownEvent(keycode);
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-//        checkAndNotify(keycode);
+        checkAndNotifyUpEvent(keycode);
         return false;
     }
 

@@ -131,6 +131,19 @@ public class GameScreen extends BaseScreen implements Observer {
         if (arg == Actions.FLIP) {
             rotateWorld();
         }
+
+        if(arg == Actions.START_LEFT) {
+            player.force(-direction);
+        }
+
+        if(arg == Actions.START_RIGHT) {
+            player.force(direction);
+        }
+
+        if(arg == Actions.STOP_LEFT || arg == Actions.STOP_RIGHT) {
+            player.force(0);
+        }
+
         physics.step(1 / 60, 6, 2);
 
         if(GameEvent.GAMEOVER == arg){
