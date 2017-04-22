@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="14" tilewidth="32" tileheight="32" nextobjectid="19">
+ <tileset firstgid="1" name="cutriba_simple_tiles" tilewidth="32" tileheight="32" tilecount="18" columns="0">
+  <tile id="0">
+   <image width="32" height="32" source="../sprites/bottom.png"/>
+  </tile>
+  <tile id="1">
+   <image width="32" height="32" source="../sprites/circle.png"/>
+  </tile>
+  <tile id="2">
+   <image width="32" height="32" source="../sprites/corner_left_bottom.png"/>
+  </tile>
+  <tile id="3">
+   <image width="32" height="32" source="../sprites/corner_left_top.png"/>
+  </tile>
+  <tile id="4">
+   <image width="32" height="32" source="../sprites/corner_right_bottom.png"/>
+  </tile>
+  <tile id="5">
+   <image width="32" height="32" source="../sprites/corner_right_top.png"/>
+  </tile>
+  <tile id="6">
+   <image width="32" height="32" source="../sprites/flag_plank.png"/>
+  </tile>
+  <tile id="7">
+   <image width="32" height="32" source="../sprites/flag_start.png"/>
+  </tile>
+  <tile id="8">
+   <image width="32" height="32" source="../sprites/flag_stop.png"/>
+  </tile>
+  <tile id="9">
+   <image width="32" height="32" source="../sprites/left.png"/>
+  </tile>
+  <tile id="10">
+   <image width="32" height="32" source="../sprites/middle_horizontal.png"/>
+  </tile>
+  <tile id="11">
+   <image width="32" height="32" source="../sprites/middle_vertical.png"/>
+  </tile>
+  <tile id="12">
+   <image width="32" height="32" source="../sprites/right.png"/>
+  </tile>
+  <tile id="13">
+   <image width="32" height="32" source="../sprites/spike_bottom.png"/>
+  </tile>
+  <tile id="14">
+   <image width="32" height="32" source="../sprites/spike_left.png"/>
+  </tile>
+  <tile id="15">
+   <image width="32" height="32" source="../sprites/spike_right'.png"/>
+  </tile>
+  <tile id="16">
+   <image width="32" height="32" source="../sprites/spike_top.png"/>
+  </tile>
+  <tile id="17">
+   <image width="32" height="32" source="../sprites/top.png"/>
+  </tile>
+ </tileset>
+ <layer name="background" width="20" height="14">
+  <data encoding="csv">
+4,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,6,
+12,0,0,0,0,0,0,0,0,10,11,13,0,0,0,0,0,0,0,12,
+12,0,0,0,0,0,0,0,0,14,14,14,0,0,0,0,0,9,0,12,
+12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,12,
+12,0,0,0,0,10,11,13,0,0,0,0,0,0,0,10,11,13,0,12,
+12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,
+12,0,0,0,0,0,0,0,0,0,0,10,11,13,0,0,0,0,0,12,
+12,10,11,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,
+12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,
+12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,
+12,0,0,0,0,10,11,11,13,0,0,0,0,0,0,0,0,0,0,12,
+12,0,8,0,0,0,15,12,0,0,0,0,0,0,0,0,0,0,0,12,
+12,0,7,0,0,0,15,12,0,0,0,0,0,0,0,0,0,0,0,12,
+3,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,5
+</data>
+ </layer>
+ <objectgroup name="obstacles">
+  <object id="1" x="0" y="416" width="640" height="32"/>
+  <object id="2" x="0" y="0" width="640" height="32"/>
+  <object id="3" x="0" y="32" width="32" height="384"/>
+  <object id="4" x="32" y="224" width="96" height="32"/>
+  <object id="5" x="160" y="128" width="96" height="32"/>
+  <object id="6" x="288" y="32" width="96" height="32"/>
+  <object id="7" x="352" y="192" width="96" height="32"/>
+  <object id="8" x="480" y="128" width="96" height="32"/>
+  <object id="9" x="608" y="32" width="32" height="384"/>
+  <object id="11" x="160" y="320" width="128" height="32"/>
+  <object id="12" x="224" y="352" width="32" height="64"/>
+ </objectgroup>
+ <objectgroup name="gameObjects">
+  <object id="13" name="Start" x="64" y="352" width="32" height="64"/>
+  <object id="15" name="Finish" x="544" y="64" width="32" height="64"/>
+  <object id="16" name="spikes" x="192" y="352" width="32" height="64"/>
+  <object id="17" name="spikes" x="288" y="64" width="96" height="32"/>
+ </objectgroup>
+</map>

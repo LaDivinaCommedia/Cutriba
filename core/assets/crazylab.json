@@ -1,5 +1,5 @@
 {
-  "map": "levels/simple.tmx",
+  "map": "maps/CrazyLab.tmx",
   "player": "circle.png",
   "background_sound": "background.mp3"
 }
