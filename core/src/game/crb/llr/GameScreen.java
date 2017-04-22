@@ -1,12 +1,10 @@
 package game.crb.llr;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapRenderer;
@@ -133,10 +131,10 @@ public class GameScreen extends BaseScreen implements Observer {
         }
         physics.step(1 / 60, 6, 2);
 
-        if(GameEvent.GAMEOVER == arg){
+        if(GameEvent.GAME_OVER == arg){
             backgroundMusic.stop();
             setChanged();
-            notifyObservers(GameEvent.GAMEOVER);
+            notifyObservers(GameEvent.GAME_OVER);
         }
     }
 

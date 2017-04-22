@@ -4,13 +4,11 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.compression.lzma.Base;
+import com.badlogic.gdx.graphics.Color;
 import game.crb.gf.GameEvent;
 import game.crb.llr.BaseScreen;
 import game.crb.llr.MenuScreen;
-import game.crb.rm.ResourceManager;
+import game.crb.llr.MessageScreen;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -23,7 +21,7 @@ public class GameLauncher extends Game implements MenuController.LevelLister, Ob
     private MenuScreen menuScreen;
     private MenuController controller;
 
-    public GameLauncher(){
+    public GameLauncher() {
         this.inputProcessor = new CutribaInputProcessor();
     }
 
@@ -38,19 +36,35 @@ public class GameLauncher extends Game implements MenuController.LevelLister, Ob
     @Override
     public void onSelectedLevel(Screen screen) {
         if (screen != null) {
-            if(screen instanceof BaseScreen){
+            if (screen instanceof BaseScreen) {
                 ((BaseScreen) screen).addObserver(this);
             }
             this.setScreen(screen);
+            if (menuScreen != null) {
+                menuScreen.dispose();
+                menuScreen = null;
+            }
         }
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        if(arg == GameEvent.GAMEOVER){
-            menuScreen = new MenuScreen();
-            controller = new MenuController(menuScreen,this);
-            this.setScreen(menuScreen);
+        if (arg == GameEvent.GAME_OVER) {
+            showMessageScreen("GAME OVER!", new Color(1.0f, 0.6f, 0.6f, 1));
         }
+        if (arg == GameEvent.LEVEL_FINISHED) {
+            showMessageScreen("LEVEL SUCCESSFULLY FINISHED!", new Color(0.6f, 0.6f, 1.0f, 1));
+        }
+    }
+
+    private void showMessageScreen(String message, Color color) {
+        MessageScreen messageScreen = new MessageScreen(message, color, (a) -> {
+            Gdx.input.setInputProcessor(inputProcessor);
+            menuScreen = new MenuScreen();
+            controller = new MenuController(menuScreen, this);
+            this.setScreen(menuScreen);
+        });
+        Gdx.input.setInputProcessor(messageScreen);
+        this.setScreen(messageScreen);
     }
 }
