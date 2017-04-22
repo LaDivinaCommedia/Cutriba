@@ -128,6 +128,24 @@ public class BodyBuilder {
                 body.getFixtureList().get(0).setUserData("spike");
             }
         }
+    }
 
+    public static void buildFinish(Map map,World physics){
+        MapObjects objects = map.getLayers().get("gameObjects").getObjects();
+
+        for(MapObject object : objects) {
+
+            if (object instanceof TextureMapObject) {
+                continue;
+            }
+
+            if(object.getName().equals("Finish")){
+
+                RectangleMapObject rect = (RectangleMapObject)object;
+                Body body = getRectangle(rect, physics);
+
+                body.getFixtureList().get(0).setUserData("finish");
+            }
+        }
     }
 }

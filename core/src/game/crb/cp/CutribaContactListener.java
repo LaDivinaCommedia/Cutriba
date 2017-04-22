@@ -26,6 +26,19 @@ public class CutribaContactListener extends Observable implements ContactListene
                 notifyObservers(GameEvent.GAMEOVER);
             }
         }
+
+        if(a.getUserData() !=null && a.getUserData().equals("player")){
+            if(b.getUserData() !=null && b.getUserData().equals("finish")){
+                setChanged();
+                notifyObservers(GameEvent.LEVELFINISH);
+            }
+        }
+        if(b.getUserData() !=null && b.getUserData().equals("player")){
+            if(a.getUserData() !=null && a.getUserData().equals("finish")){
+                setChanged();
+                notifyObservers(GameEvent.LEVELFINISH);
+            }
+        }
     }
 
     @Override
