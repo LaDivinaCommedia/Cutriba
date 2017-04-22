@@ -47,13 +47,13 @@ public class CutribaInputProcessor extends Observable implements InputProcessor 
 
     @Override
     public boolean keyDown(int keycode) {
-        //checkAndNotify(keycode);
+        checkAndNotify(keycode);
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        checkAndNotify(keycode);
+//        checkAndNotify(keycode);
         return false;
     }
 

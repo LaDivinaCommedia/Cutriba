@@ -2,8 +2,12 @@ package game.crb.gf;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import game.crb.Utility.Actions;
+import game.crb.Utility.BodyBuilder;
 import game.crb.gss.CutribaInputProcessor;
 
 import java.util.Observable;
@@ -16,11 +20,45 @@ import java.util.Observer;
  */
 public class Player extends Actor {
     private Texture texture;
+    private Body body;
 
     public Player(Texture texture){
         this.texture = texture;
         setBounds(getX(),getY(),texture.getWidth(),texture.getHeight());
     }
+
+    public void initBody(World world) {
+        body = BodyBuilder.buildPlayerShape(world);
+    }
+
+    public void update() {
+        //updating the player sprite position on the player body
+        this.setPosition(body.getPosition().x, body.getPosition().y);
+        this.setRotation(body.getAngle());
+    }
+
+    public void move(float x, float y) {
+        move(x, y, 100.0f);
+    }
+
+    public void move(float x, float y, float velocity) {
+        float mass = body.getMass();
+        Vector2 targetPosition = new Vector2(body.getPosition());
+        targetPosition.add(x, y);
+        // Now calculate the impulse magnitude and use it to scale
+        // a direction (because its 2D movement)
+        float impulseMag = mass * velocity;
+        // Point the cannon towards the touch point
+        Vector2 impulse = new Vector2();
+        // Point the impulse from the cannon ball to the target
+        impulse.set(targetPosition).sub(body.getPosition());
+        // Normalize the direction (to get a constant speed)
+        impulse.nor();
+        // Scale by the calculated magnitude
+        impulse.scl(impulseMag);
+        body.applyLinearImpulse(impulse, body.getWorldCenter(), true);
+    }
+
    @Override
     public void draw(Batch batch, float alpha){
         batch.draw(texture,this.getX(),getY());

@@ -32,7 +32,7 @@ public class GameFlow {
         return resourceManager.loadMap(levelName);
     }
 
-    private Actor loadPlayer(String playerName) {
+    private Player loadPlayer(String playerName) {
         Texture texture = resourceManager.loadSprite(playerName);
         return new Player(texture);
     }
@@ -56,7 +56,7 @@ public class GameFlow {
             camera.setToOrtho(false);
             TiledMap map = this.loadMap(levelInfo.get(ResourceManager.MAP));
             this.renderer = new OrthogonalTiledMapRenderer(map);
-            Actor actor = this.loadPlayer(levelInfo.get(ResourceManager.PLAYER));
+            Player actor = this.loadPlayer(levelInfo.get(ResourceManager.PLAYER));
             return new GameScreen(camera, renderer, actor, map);
         } catch (IOException e) {
             e.printStackTrace();
