@@ -16,8 +16,10 @@ import game.crb.rm.BodyBuilder;
 public class Player extends Actor {
     private Texture texture;
     private Body body;
+    private Vector2 force;
 
     public Player(Texture texture){
+        this.force = new Vector2();
         this.texture = texture;
         setBounds(getX(),getY(),texture.getWidth(),texture.getHeight());
     }
@@ -27,6 +29,8 @@ public class Player extends Actor {
     }
 
     public void update() {
+        body.applyForceToCenter(force, true);
+
         if (body == null) {
             return;
         }
@@ -35,8 +39,17 @@ public class Player extends Actor {
         this.setRotation(body.getAngle());
     }
 
+    public void force(float direction) {
+        Vector2 vel = body.getLinearVelocity();
+        if (Math.abs(vel.y) > 1) {
+            return;
+        }
+
+        this.force.x = direction * 70000;
+    }
+
     public void move(float dx, float dy) {
-        move(dx, dy, 100.0f);
+        move(dx, dy, 400.0f);
     }
 
     public void move(float dx, float dy, float velocity) {

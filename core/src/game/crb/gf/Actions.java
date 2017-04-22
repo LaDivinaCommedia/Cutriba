@@ -9,5 +9,9 @@ public enum Actions{
     DOWN,
     LEFT,
     RIGHT,
-    FLIP
+    FLIP,
+    START_RIGHT,
+    STOP_RIGHT,
+    START_LEFT,
+    STOP_LEFT
 }
