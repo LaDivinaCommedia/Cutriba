@@ -1,4 +1,4 @@
-package game.crb.Utility;
+package game.crb.rm;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -38,6 +38,8 @@ public class BodyBuilder {
 
         body.createFixture(fixtureDef);
         shape.dispose();
+
+        body.getFixtureList().get(0).setUserData("player");
 
         return body;
     }
@@ -91,7 +93,7 @@ public class BodyBuilder {
 
     }
 
-    public static float[] searcForStart(Map map) {
+    public static float[] searchForStart(Map map) {
         MapObjects objects = map.getLayers().get("gameObjects").getObjects();
 
         for(MapObject object : objects) {
@@ -105,8 +107,27 @@ public class BodyBuilder {
                 Rectangle r = ((RectangleMapObject)object).getRectangle();
                 return new float[]{r.x + r.width/2,r.y + r.height/2};
             }
-
         }
         return new float[2];
+    }
+
+    public static void buildSpikesObjects(Map map, World physics) {
+        MapObjects objects = map.getLayers().get("gameObjects").getObjects();
+
+        for(MapObject object : objects) {
+
+            if (object instanceof TextureMapObject) {
+                continue;
+            }
+
+            if(object.getName().equals("spikes")){
+
+                RectangleMapObject rect = (RectangleMapObject)object;
+                Body body = getRectangle(rect, physics);
+
+                body.getFixtureList().get(0).setUserData("spike");
+            }
+        }
+
     }
 }

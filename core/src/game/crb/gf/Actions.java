@@ -1,4 +1,4 @@
-package game.crb.Utility;
+package game.crb.gf;
 
 /**
  * Actions of input events.

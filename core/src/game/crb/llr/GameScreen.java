@@ -6,15 +6,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
-import game.crb.Utility.Actions;
-import game.crb.Utility.BodyBuilder;
+import game.crb.gf.Actions;
+import game.crb.rm.BodyBuilder;
+import game.crb.gf.GameEvent;
 import game.crb.cp.CutribaContactListener;
 import game.crb.gf.Player;
 import game.crb.gss.CutribaInputProcessor;
@@ -32,7 +31,6 @@ public class GameScreen implements Screen, Observer {
     private Player player;
     private SpriteBatch batch;
     private World physics;
-    private Array<Body> mapBodies;
     private Color clearColor;
 
     public GameScreen(OrthographicCamera camera, MapRenderer renderer, Player player, Map map) {
@@ -41,14 +39,17 @@ public class GameScreen implements Screen, Observer {
         this.player = player;
         this.batch = new SpriteBatch();
         this.physics = new World(new Vector2(0, -89), false);
-        physics.setContactListener(new CutribaContactListener());
+        CutribaContactListener cl = new CutribaContactListener();
+        cl.addObserver(this);
+        physics.setContactListener(cl);
 
         clearColor = new Color(1, 1, 1, 1);
         renderer.setView(camera);
 
-        float[] start = BodyBuilder.searcForStart(map);
+        float[] start = BodyBuilder.searchForStart(map);
         player.initBody(start[0],start[1],physics);
-        mapBodies = BodyBuilder.buildMapShapes(map, 32, this.physics);
+        BodyBuilder.buildMapShapes(map, 32, this.physics);
+        BodyBuilder.buildSpikesObjects (map,this.physics);
         CutribaInputProcessor cutribaInputProcessor = new CutribaInputProcessor();
         cutribaInputProcessor.addObserver(this);
         Gdx.input.setInputProcessor(cutribaInputProcessor);
@@ -124,6 +125,12 @@ public class GameScreen implements Screen, Observer {
             rotateWorld();
         }
         physics.step(1 / 60, 6, 2);
+
+
+        if(GameEvent.GAMEOVER == arg){
+
+            player.setPosition(700,700);
+        }
     }
 
     private void createRandomRotationTimer() {

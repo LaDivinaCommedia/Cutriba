@@ -1,7 +1,7 @@
 package game.crb.gss;
 
 import com.badlogic.gdx.InputProcessor;
-import game.crb.Utility.Actions;
+import game.crb.gf.Actions;
 
 import java.util.Observable;
 
