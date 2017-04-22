@@ -133,6 +133,7 @@ public class GameScreen extends BaseScreen implements Observer {
         physics.step(1 / 60, 6, 2);
 
         if(GameEvent.GAMEOVER == arg){
+            backgroundMusic.stop();
             setChanged();
             notifyObservers(GameEvent.GAMEOVER);
         }

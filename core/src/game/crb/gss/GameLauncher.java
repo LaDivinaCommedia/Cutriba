@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.compression.lzma.Base;
 import game.crb.gf.GameEvent;
 import game.crb.llr.BaseScreen;
 import game.crb.llr.MenuScreen;
+import game.crb.rm.ResourceManager;
 
 import java.util.Observable;
 import java.util.Observer;
