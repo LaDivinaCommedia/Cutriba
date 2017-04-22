@@ -145,6 +145,7 @@ public class BodyBuilder {
                 Body body = getRectangle(rect, physics);
 
                 body.getFixtureList().get(0).setUserData("finish");
+
             }
         }
     }

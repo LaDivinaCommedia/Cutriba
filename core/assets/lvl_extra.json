@@ -1,0 +1,5 @@
+{
+  "map": "maps/lvl_extra.tmx",
+  "player": "circle.png",
+  "background_sound": "background.mp3"
+}
