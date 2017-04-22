@@ -1,5 +1,7 @@
 package game.crb.Utility;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -27,7 +29,8 @@ public class BodyBuilder {
         Body body = world.createBody(bodyDef);
 
         CircleShape shape = new CircleShape();
-        shape.setRadius(32f);
+        shape.setRadius(16f);
+        shape.setPosition(new Vector2(16,16));
 
         FixtureDef fixtureDef = new FixtureDef();   //IDK WTF is this
         fixtureDef.shape = shape;
