@@ -81,8 +81,8 @@ public class GameScreen implements Screen, Observer {
         batch.begin();
         player.draw(batch, 1);
         batch.end();
-        //Box2DDebugRenderer dr = new Box2DDebugRenderer();
-        //dr.render(physics, camera.combined);
+        Box2DDebugRenderer dr = new Box2DDebugRenderer();
+        dr.render(physics, camera.combined);
 
     }
 
