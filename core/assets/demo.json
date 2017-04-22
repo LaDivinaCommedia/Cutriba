@@ -1,5 +1,5 @@
 {
-  "map": "maps/demo_map.tmx",
+  "map": "levels/simple.tmx",
   "player": "circle.png",
   "background_sound": "background.mp3"
 }
