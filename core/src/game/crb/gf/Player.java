@@ -43,6 +43,12 @@ public class Player extends Actor {
         if (body == null) {
             return;
         }
+
+        Vector2 linearVelocity = body.getLinearVelocity();
+        if (Math.abs(linearVelocity.y) > 0.1) {
+            return;
+        }
+
         float mass = body.getMass();
         Vector2 targetPosition = new Vector2(body.getPosition());
         targetPosition.add(dx, dy);
