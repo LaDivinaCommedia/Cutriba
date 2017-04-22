@@ -49,6 +49,7 @@ public class GameFlow {
     }
 
     public GameScreen loadLevel(String levelName) {
+        resourceManager.dispose();
         String levelLocation = listOfLevels.get(levelName);
         Map<String, String> levelInfo;
         try {
