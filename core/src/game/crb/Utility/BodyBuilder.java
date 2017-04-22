@@ -72,14 +72,11 @@ public class BodyBuilder {
 
         BodyDef bd = new BodyDef();
         bd.type = BodyDef.BodyType.StaticBody;
-        bd.position.set(rectangle.x,rectangle.y);
+        bd.position.set(rectangle.x + rectangle.width/2,rectangle.y + rectangle.height/2);
 
         FixtureDef fd = new FixtureDef();
-        fd.filter.categoryBits = 0x0010;
-        fd.filter.maskBits = 0x0001;
 
-         PolygonShape shape = new PolygonShape();
-
+        PolygonShape shape = new PolygonShape();
 
         shape.setAsBox(rectangle.width/2,rectangle.height/2);
         fd.shape = shape;
