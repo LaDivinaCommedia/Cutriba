@@ -54,6 +54,7 @@ public class GameScreen extends BaseScreen implements Observer {
 
         float[] start = BodyBuilder.searchForStart(map);
         player.initBody(start[0],start[1],physics);
+        BodyBuilder.buildFinish(map,this.physics);
         BodyBuilder.buildMapShapes(map, 32, this.physics);
         BodyBuilder.buildSpikesObjects (map,this.physics);
         CutribaInputProcessor cutribaInputProcessor = new CutribaInputProcessor();
