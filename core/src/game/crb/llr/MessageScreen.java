@@ -2,11 +2,13 @@ package game.crb.llr;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 import java.util.function.Consumer;
 
@@ -27,8 +29,15 @@ public class MessageScreen extends BaseScreen implements InputProcessor {
     public MessageScreen(String text, Color clearColor, Consumer<Object> supplier) {
         batch = new SpriteBatch();
         font = new BitmapFont();
+
+        FileHandle fontFile = Gdx.files.internal("fonts/SansPosterBold.ttf");
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 48;
+        font = generator.generateFont(parameter);
+
         font.setColor(0, 0, 0, 1);
-        font.getData().setScale(2);
+        font.getData().setScale(1);
         glyphLayout = new GlyphLayout();
         glyphLayout.setText(font, text);
         this.clearColor = clearColor;
