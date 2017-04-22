@@ -1,0 +1,5 @@
+{
+  "map": "maps/CrazyLab.tmx",
+  "player": "circle.png",
+  "background_sound": "background.mp3"
+}
