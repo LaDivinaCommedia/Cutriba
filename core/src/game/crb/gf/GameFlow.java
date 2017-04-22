@@ -1,5 +1,6 @@
 package game.crb.gf;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapRenderer;
@@ -57,7 +58,8 @@ public class GameFlow {
             TiledMap map = this.loadMap(levelInfo.get(ResourceManager.MAP));
             this.renderer = new OrthogonalTiledMapRenderer(map);
             Player actor = this.loadPlayer(levelInfo.get(ResourceManager.PLAYER));
-            return new GameScreen(camera, renderer, actor, map);
+            Music music = resourceManager.loadMusic(levelInfo.get(ResourceManager.BACKGRROUND_SOUND));
+            return new GameScreen(camera, renderer, actor, map, music);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package game.crb.rm;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -27,6 +28,7 @@ public class ResourceManager implements Disposable {
 
     public static String MAP = "map";
     public static String PLAYER = "player";
+    public static String BACKGRROUND_SOUND = "background_sound";
 
 
     private List<Disposable> disposableList;
@@ -73,6 +75,10 @@ public class ResourceManager implements Disposable {
         Texture texture = new Texture(Gdx.files.internal(name));
         disposableList.add(texture);
         return texture;
+    }
+
+    public Music loadMusic(String name) {
+        return Gdx.audio.newMusic(Gdx.files.internal(name));
     }
 
     @Override
