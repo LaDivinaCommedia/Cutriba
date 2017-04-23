@@ -54,25 +54,23 @@ public class GameScreen extends BaseScreen implements Observer {
         physics.setContactListener(cl);
 
 
-        BitmapFont font = new BitmapFont();
+        BitmapFont font;
         FileHandle fontFile = Gdx.files.internal("fonts/SansPosterBold.ttf");
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 10;
         font = generator.generateFont(parameter);
         font.setColor(0, 0, 0, 1);
-        font.getData().setScale(1);
-        label = new Label(" ",new Label.LabelStyle(font,Color.BLACK));
-        //label.setPosition(Gdx.graphics.getWidth()/2 - 3, Gdx.graphics.getHeight()/2-9);
+        label = new Label(" ", new Label.LabelStyle(font, Color.BLACK));
 
         clearColor = new Color(1, 1, 1, 1);
         renderer.setView(camera);
 
         float[] start = BodyBuilder.searchForStart(map);
-        player.initBody(start[0],start[1],physics);
-        BodyBuilder.buildFinish(map,this.physics);
+        player.initBody(start[0], start[1], physics);
+        BodyBuilder.buildFinish(map, this.physics);
         BodyBuilder.buildMapShapes(map, 32, this.physics);
-        BodyBuilder.buildSpikesObjects (map,this.physics);
+        BodyBuilder.buildSpikesObjects(map, this.physics);
         CutribaInputProcessor cutribaInputProcessor = new CutribaInputProcessor();
         cutribaInputProcessor.addObserver(this);
         Gdx.input.setInputProcessor(cutribaInputProcessor);
@@ -105,18 +103,18 @@ public class GameScreen extends BaseScreen implements Observer {
         StringBuilder sb = new StringBuilder();
         sb.append("FPS: ").append(Gdx.graphics.getFramesPerSecond());
         label.setText(sb);
-        if (rotated){
-            label.setPosition(player.getX()+Gdx.graphics.getWidth()/2-55 ,
-                    player.getY()+Gdx.graphics.getHeight()/2-12);
-        }else{
-            label.setPosition(player.getX()-Gdx.graphics.getWidth()/2 ,
-                    player.getY()-Gdx.graphics.getHeight()/2);
+        if (rotated) {
+            label.setPosition(player.getX() + Gdx.graphics.getWidth() / 2 - 55,
+                    player.getY() + Gdx.graphics.getHeight() / 2 - 12);
+        } else {
+            label.setPosition(player.getX() - Gdx.graphics.getWidth() / 2,
+                    player.getY() - Gdx.graphics.getHeight() / 2);
         }
 
 
         batch.begin();
         player.draw(batch, 1);
-        label.draw(batch, 100);
+        label.draw(batch, 1);
         batch.end();
         Box2DDebugRenderer dr = new Box2DDebugRenderer();
         dr.render(physics, camera.combined);
@@ -161,26 +159,26 @@ public class GameScreen extends BaseScreen implements Observer {
             rotateWorld();
         }
 
-        if(arg == Actions.START_LEFT) {
+        if (arg == Actions.START_LEFT) {
             player.force(-direction);
         }
 
-        if(arg == Actions.START_RIGHT) {
+        if (arg == Actions.START_RIGHT) {
             player.force(direction);
         }
 
-        if(arg == Actions.STOP_LEFT || arg == Actions.STOP_RIGHT) {
+        if (arg == Actions.STOP_LEFT || arg == Actions.STOP_RIGHT) {
             player.force(0);
         }
 
         physics.step(1 / 60, 6, 2);
 
-        if(GameEvent.GAME_OVER == arg){
+        if (GameEvent.GAME_OVER == arg) {
             backgroundMusic.stop();
             setChanged();
             notifyObservers(GameEvent.GAME_OVER);
         }
-        if(GameEvent.LEVEL_FINISHED == arg){
+        if (GameEvent.LEVEL_FINISHED == arg) {
             setChanged();
             notifyObservers(GameEvent.LEVEL_FINISHED);
         }
@@ -222,10 +220,11 @@ public class GameScreen extends BaseScreen implements Observer {
             }
         }, 0, intervalSeconds, repeatCount - 1);
         Vector2 gravity = physics.getGravity();
-        rotated = !rotated;
-        label.setRotation(180);
         gravity.y = -gravity.y;
         physics.setGravity(gravity);
+
+        rotated = !rotated;
+        label.setRotation(180);
     }
 
 }
