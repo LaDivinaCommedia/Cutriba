@@ -2,14 +2,18 @@ package game.crb.llr;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Timer;
 import game.crb.gf.Actions;
 import game.crb.rm.BodyBuilder;
@@ -26,6 +30,7 @@ import java.util.Random;
  * Created by Iggytoto on 19.04.2017.
  */
 public class GameScreen extends BaseScreen implements Observer {
+    private Label label;
     private OrthographicCamera camera;
     private MapRenderer renderer;
     private Player player;
@@ -33,6 +38,7 @@ public class GameScreen extends BaseScreen implements Observer {
     private World physics;
     private Color clearColor;
     private Music backgroundMusic;
+    private boolean rotated;
 
     public GameScreen(OrthographicCamera camera, MapRenderer renderer, Player player, Map map, Music music) {
         this.camera = camera;
@@ -46,6 +52,18 @@ public class GameScreen extends BaseScreen implements Observer {
         CutribaContactListener cl = new CutribaContactListener();
         cl.addObserver(this);
         physics.setContactListener(cl);
+
+
+        BitmapFont font = new BitmapFont();
+        FileHandle fontFile = Gdx.files.internal("fonts/SansPosterBold.ttf");
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 10;
+        font = generator.generateFont(parameter);
+        font.setColor(0, 0, 0, 1);
+        font.getData().setScale(1);
+        label = new Label(" ",new Label.LabelStyle(font,Color.BLACK));
+        //label.setPosition(Gdx.graphics.getWidth()/2 - 3, Gdx.graphics.getHeight()/2-9);
 
         clearColor = new Color(1, 1, 1, 1);
         renderer.setView(camera);
@@ -84,9 +102,21 @@ public class GameScreen extends BaseScreen implements Observer {
         renderer.render();
 
         batch.setProjectionMatrix(camera.combined);
+        StringBuilder sb = new StringBuilder();
+        sb.append("FPS: ").append(Gdx.graphics.getFramesPerSecond());
+        label.setText(sb);
+        if (rotated){
+            label.setPosition(player.getX()+Gdx.graphics.getWidth()/2-55 ,
+                    player.getY()+Gdx.graphics.getHeight()/2-12);
+        }else{
+            label.setPosition(player.getX()-Gdx.graphics.getWidth()/2 ,
+                    player.getY()-Gdx.graphics.getHeight()/2);
+        }
+
 
         batch.begin();
         player.draw(batch, 1);
+        label.draw(batch, 100);
         batch.end();
         Box2DDebugRenderer dr = new Box2DDebugRenderer();
         dr.render(physics, camera.combined);
@@ -183,6 +213,8 @@ public class GameScreen extends BaseScreen implements Observer {
     private void rotateWorld() {
         Vector2 gravity = physics.getGravity();
         camera.rotate(180);
+        rotated = !rotated;
+        label.setRotation(180);
         gravity.y = -gravity.y;
         physics.setGravity(gravity);
     }
