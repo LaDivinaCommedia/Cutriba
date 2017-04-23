@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="35" height="9" tilewidth="32" tileheight="32" nextobjectid="11">
+ <tileset firstgid="1" name="cutriba_sprites" tilewidth="32" tileheight="32" tilecount="32" columns="0">
+  <tile id="0">
+   <image width="32" height="32" source="../sprites/bottom.png"/>
+  </tile>
+  <tile id="1">
+   <image width="32" height="32" source="../sprites/circle.png"/>
+  </tile>
+  <tile id="2">
+   <image width="32" height="32" source="../sprites/corner_left_bottom.png"/>
+  </tile>
+  <tile id="3">
+   <image width="32" height="32" source="../sprites/corner_left_top.png"/>
+  </tile>
+  <tile id="4">
+   <image width="32" height="32" source="../sprites/corner_right_bottom.png"/>
+  </tile>
+  <tile id="5">
+   <image width="32" height="32" source="../sprites/corner_right_top.png"/>
+  </tile>
+  <tile id="6">
+   <image width="32" height="32" source="../sprites/flag_plank.png"/>
+  </tile>
+  <tile id="7">
+   <image width="32" height="32" source="../sprites/flag_start.png"/>
+  </tile>
+  <tile id="8">
+   <image width="32" height="32" source="../sprites/flag_stop.png"/>
+  </tile>
+  <tile id="9">
+   <image width="32" height="32" source="../sprites/left.png"/>
+  </tile>
+  <tile id="10">
+   <image width="32" height="32" source="../sprites/middle_horizontal.png"/>
+  </tile>
+  <tile id="11">
+   <image width="32" height="32" source="../sprites/middle_vertical.png"/>
+  </tile>
+  <tile id="12">
+   <image width="32" height="32" source="../sprites/right.png"/>
+  </tile>
+  <tile id="13">
+   <image width="32" height="32" source="../sprites/spike_bottom.png"/>
+  </tile>
+  <tile id="14">
+   <image width="32" height="32" source="../sprites/spike_left.png"/>
+  </tile>
+  <tile id="15">
+   <image width="32" height="32" source="../sprites/spike_right'.png"/>
+  </tile>
+  <tile id="16">
+   <image width="32" height="32" source="../sprites/spike_top.png"/>
+  </tile>
+  <tile id="17">
+   <image width="32" height="32" source="../sprites/top.png"/>
+  </tile>
+  <tile id="18">
+   <image width="32" height="32" source="../sprites/corner_bottom_left_small.png"/>
+  </tile>
+  <tile id="19">
+   <image width="32" height="32" source="../sprites/corner_bottom_right_small.png"/>
+  </tile>
+  <tile id="20">
+   <image width="32" height="32" source="../sprites/corner_left_right_small.png"/>
+  </tile>
+  <tile id="21">
+   <image width="32" height="32" source="../sprites/corner_left_top_small.png"/>
+  </tile>
+  <tile id="22">
+   <image width="32" height="32" source="../sprites/key_left.png"/>
+  </tile>
+  <tile id="23">
+   <image width="32" height="32" source="../sprites/key_right.png"/>
+  </tile>
+  <tile id="24">
+   <image width="32" height="32" source="../sprites/hint_left.png"/>
+  </tile>
+  <tile id="25">
+   <image width="32" height="32" source="../sprites/hint_right.png"/>
+  </tile>
+  <tile id="26">
+   <image width="32" height="32" source="../sprites/hint_up.png"/>
+  </tile>
+  <tile id="27">
+   <image width="32" height="32" source="../sprites/key_up.png"/>
+  </tile>
+  <tile id="28">
+   <image width="32" height="32" source="../sprites/key_space_left.png"/>
+  </tile>
+  <tile id="29">
+   <image width="32" height="32" source="../sprites/key_space_middle.png"/>
+  </tile>
+  <tile id="30">
+   <image width="32" height="32" source="../sprites/key_space_right.png"/>
+  </tile>
+  <tile id="31">
+   <image width="32" height="32" source="../sprites/hint_rotate.png"/>
+  </tile>
+ </tileset>
+ <layer name="background" width="35" height="9">
+  <data encoding="csv">
+4,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,6,0,0,0,0,0,0,0,0,0,0,0,0,
+12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,12,0,0,0,0,0,0,0,0,0,0,0,0,
+12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,12,0,0,0,0,0,0,0,0,0,0,0,0,
+12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,0,0,0,0,0,
+12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,0,0,0,0,0,
+12,0,0,0,0,0,0,0,0,27,0,0,0,0,0,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,0,0,0,0,0,
+12,0,8,0,25,23,24,26,0,28,0,4,11,6,0,0,29,30,31,0,32,0,12,0,0,0,0,0,0,0,0,0,0,0,0,
+12,0,7,0,0,0,0,0,0,0,0,12,0,12,0,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,0,0,0,0,0,
+3,11,11,11,11,11,11,11,11,11,11,5,0,3,11,11,11,11,11,11,11,11,5,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="obstacles">
+  <object id="3" x="0" y="256" width="736" height="32"/>
+  <object id="4" x="352" y="192" width="96" height="64"/>
+  <object id="7" x="704" y="32" width="32" height="224"/>
+  <object id="8" x="0" y="0" width="736" height="32"/>
+  <object id="9" x="0" y="32" width="32" height="224"/>
+ </objectgroup>
+ <objectgroup name="gameObjects">
+  <object id="1" name="Start" x="64" y="192" width="32" height="64"/>
+  <object id="2" name="Finish" x="576" y="32" width="32" height="64"/>
+ </objectgroup>
+</map>
