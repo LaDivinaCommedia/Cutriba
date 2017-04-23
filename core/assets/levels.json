@@ -1,4 +1,5 @@
 {
+  "Tutorial": "tutorial.json",
   "Demo": "demo.json",
   "Crazy lab" : "crazylab.json",
   "Just do it": "lvl_extra.json"
