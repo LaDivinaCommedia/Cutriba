@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Timer;
 import game.crb.gf.Actions;
@@ -30,6 +31,7 @@ import java.util.Random;
  * Created by Iggytoto on 19.04.2017.
  */
 public class GameScreen extends BaseScreen implements Observer {
+    private LetterActor packageForLabel;
     private Label label;
     private OrthographicCamera camera;
     private MapRenderer renderer;
@@ -62,7 +64,7 @@ public class GameScreen extends BaseScreen implements Observer {
         font = generator.generateFont(parameter);
         font.setColor(0, 0, 0, 1);
         label = new Label(" ", new Label.LabelStyle(font, Color.BLACK));
-
+        packageForLabel = new LetterActor(label);
         clearColor = new Color(1, 1, 1, 1);
         renderer.setView(camera);
 
@@ -104,21 +106,19 @@ public class GameScreen extends BaseScreen implements Observer {
         sb.append("FPS: ").append(Gdx.graphics.getFramesPerSecond());
         label.setText(sb);
         if (rotated) {
-            label.setPosition(player.getX() + Gdx.graphics.getWidth() / 2 - 55,
-                    player.getY() + Gdx.graphics.getHeight() / 2 - 12);
+            packageForLabel.setPosition(player.getX() + Gdx.graphics.getWidth() / 2 - 10 ,
+                    player.getY() + Gdx.graphics.getHeight() / 2 - 2);
+            //packageForLabel.setRotation(180);
         } else {
-            label.setPosition(player.getX() - Gdx.graphics.getWidth() / 2,
+            packageForLabel.setPosition(player.getX() - Gdx.graphics.getWidth() / 2,
                     player.getY() - Gdx.graphics.getHeight() / 2);
         }
 
 
         batch.begin();
         player.draw(batch, 1);
-        label.draw(batch, 1);
+        packageForLabel.draw(batch, 1);
         batch.end();
-//        Box2DDebugRenderer dr = new Box2DDebugRenderer();
-//        dr.render(physics, camera.combined);
-
     }
 
     @Override
@@ -229,7 +229,18 @@ public class GameScreen extends BaseScreen implements Observer {
         physics.setGravity(gravity);
 
         rotated = !rotated;
-        label.setRotation(180);
+        if(rotated)
+            packageForLabel.setRotation(180);
+        else
+            packageForLabel.setRotation(0);
+    }
+
+    private class LetterActor extends Group {
+        Label label;
+        public LetterActor(Label label){
+            this.label = label;
+            this.addActor(label);
+        }
     }
 
 }
