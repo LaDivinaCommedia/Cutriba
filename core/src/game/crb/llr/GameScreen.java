@@ -116,8 +116,8 @@ public class GameScreen extends BaseScreen implements Observer {
         player.draw(batch, 1);
         label.draw(batch, 1);
         batch.end();
-        Box2DDebugRenderer dr = new Box2DDebugRenderer();
-        dr.render(physics, camera.combined);
+//        Box2DDebugRenderer dr = new Box2DDebugRenderer();
+//        dr.render(physics, camera.combined);
 
     }
 
@@ -140,7 +140,11 @@ public class GameScreen extends BaseScreen implements Observer {
 
     @Override
     public void dispose() {
-        batch.dispose();
+        if (!isDisposed) {
+            super.dispose();
+            batch.dispose();
+            physics.dispose();
+        }
     }
 
     @Override

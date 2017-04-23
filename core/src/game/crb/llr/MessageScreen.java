@@ -84,13 +84,16 @@ public class MessageScreen extends BaseScreen implements InputProcessor {
 
     @Override
     public void dispose() {
-        batch.dispose();
-        font.dispose();
+        if (!isDisposed) {
+            super.dispose();
+            batch.dispose();
+            font.dispose();
+        }
     }
 
     @Override
     public boolean keyDown(int keycode) {
-        consumer.accept(null);
+        consumer.accept(this);
         return false;
     }
 

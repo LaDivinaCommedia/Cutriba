@@ -78,7 +78,9 @@ public class ResourceManager implements Disposable {
     }
 
     public Music loadMusic(String name) {
-        return Gdx.audio.newMusic(Gdx.files.internal(name));
+        Music music = Gdx.audio.newMusic(Gdx.files.internal(name));
+        disposableList.add(music);
+        return music;
     }
 
     @Override

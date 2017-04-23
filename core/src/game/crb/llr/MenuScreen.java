@@ -74,6 +74,17 @@ public class MenuScreen extends BaseScreen implements Screen {
     }
 
     @Override
+    public void dispose() {
+        if (!isDisposed) {
+            super.dispose();
+            stage.dispose();
+            skin.dispose();
+            batch.dispose();
+            menuListeners.clear();
+        }
+    }
+
+    @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -112,10 +123,6 @@ public class MenuScreen extends BaseScreen implements Screen {
 
     @Override
     public void hide() {
-    }
-
-    @Override
-    public void dispose() {
     }
 
     private void onMenuItemSelected(CharSequence item) {

@@ -9,4 +9,12 @@ import java.util.Observer;
  * Created by Iggytoto on 22.04.2017.
  */
 public abstract class BaseScreen extends Observable implements Screen {
+    protected boolean isDisposed = false;
+    @Override
+    public void dispose() {
+        if (!isDisposed) {
+            deleteObservers();
+            isDisposed = true;
+        }
+    }
 }
