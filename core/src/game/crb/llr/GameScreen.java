@@ -95,6 +95,7 @@ public class GameScreen extends BaseScreen implements Observer {
 
     @Override
     public void resize(int width, int height) {
+        camera.setToOrtho(false, width, height);
     }
 
     @Override
@@ -181,8 +182,16 @@ public class GameScreen extends BaseScreen implements Observer {
     }
 
     private void rotateWorld() {
+        final int repeatCount = 30;
+        final float intervalSeconds = 0.5f / repeatCount;
+        final float angle = 180 / repeatCount;
+        new Timer().scheduleTask(new Timer.Task() {
+            @Override
+            public void run() {
+                camera.rotate(angle);
+            }
+        }, 0, intervalSeconds, repeatCount - 1);
         Vector2 gravity = physics.getGravity();
-        camera.rotate(180);
         gravity.y = -gravity.y;
         physics.setGravity(gravity);
     }

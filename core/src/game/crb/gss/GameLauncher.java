@@ -53,7 +53,7 @@ public class GameLauncher extends Game implements MenuController.LevelLister, Ob
             showMessageScreen("GAME OVER!", new Color(1.0f, 0.6f, 0.6f, 1));
         }
         if (arg == GameEvent.LEVEL_FINISHED) {
-            showMessageScreen("LEVEL SUCCESSFULLY FINISHED!", new Color(0.6f, 0.6f, 1.0f, 1));
+            showMessageScreen("LEVEL FINISHED!", new Color(0.6f, 0.6f, 1.0f, 1));
         }
     }
 
