@@ -183,6 +183,7 @@ public class GameScreen extends BaseScreen implements Observer {
             notifyObservers(GameEvent.GAME_OVER);
         }
         if (GameEvent.LEVEL_FINISHED == arg) {
+            backgroundMusic.stop();
             setChanged();
             notifyObservers(GameEvent.LEVEL_FINISHED);
         }
