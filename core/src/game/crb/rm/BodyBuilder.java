@@ -29,7 +29,7 @@ public class BodyBuilder {
         Body body = world.createBody(bodyDef);
 
         CircleShape shape = new CircleShape();
-        shape.setRadius(16f);
+        shape.setRadius(14f);
         shape.setPosition(new Vector2(16,16));
 
         FixtureDef fixtureDef = new FixtureDef();
